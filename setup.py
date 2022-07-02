@@ -13,9 +13,6 @@ from dash.dependencies import Output, Input
 import dash_bootstrap_components as dbc
 import plotly.express as px
 
-import warnings
-warnings.filterwarnings("ignore")
-
 # File url set as public in google drive so wecan read the data from it
 dsetURL = 'https://drive.google.com/uc?id=1ELBlnXhxsPlWuLxNZl7268bBp_2HCNbO&export=format=csv'
 df = pd.read_csv(dsetURL, low_memory=False)
