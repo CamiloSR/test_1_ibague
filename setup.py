@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import pandas as pd
 import numpy as npdd
 
@@ -12,6 +11,15 @@ import plotly.graph_objects as go
 from dash.dependencies import Output, Input
 import dash_bootstrap_components as dbc
 import plotly.express as px
+
+
+## ----------------------------------------------------------------------------
+## ----------------------------------------------------------------------------
+## app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+## Start application
+app = dash.Dash(__name__)
+server = app.server
+
 
 # File url set as public in google drive so wecan read the data from it
 dsetURL = 'https://drive.google.com/uc?id=1ELBlnXhxsPlWuLxNZl7268bBp_2HCNbO&export=format=csv'
@@ -44,13 +52,6 @@ def generate_table(df, max_rows = 25):
     )
     
     return table
-
-## ----------------------------------------------------------------------------
-## ----------------------------------------------------------------------------
-## app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-## Start application
-app = dash.Dash(__name__)
-server = app.server
 
 
 ## --------------------------------------------------------------------------------------------------------------
@@ -131,7 +132,11 @@ table_df = df[['no_radicacion',
 table_df.rename(columns=table_headers, inplace=True)
 table_1 = generate_table(table_df, max_rows=20)
 
-table_pagination = dbc.Pagination(max_value=5, first_last=True, previous_next=True, id='pages_csr', className='pagination')
+table_pagination = dbc.Pagination(max_value=7,
+                                  first_last=True,
+                                  previous_next=True,
+                                  id='pages_csr'
+                                 )
 
 ## ----------------------------------------------------------------------------
 ## ----------------------------------------------------------------------------
@@ -155,9 +160,11 @@ fig_2 = px.pie(pie_tipos, values=pie_tipos['Cantidad'], names=pie_tipos.index)
 ## --------------------------------------------------------------------------------------------------------------
 ## Define HTML Layout
 ## --------------------------------------------------------------------------------------------------------------
+
 app.layout = html.Div([
     html.P(children='Ibague PQRS', id='the_title'),
     navbar,
+    
     html.Div([
         dropDown_1,
         search_1,
@@ -168,7 +175,7 @@ app.layout = html.Div([
     
     html.Div([
         html.Div(
-            [html.Div(html.Div(id='table_1', className='table-wrapper')), #className='table-limits'
+            [html.Div(html.Div(id='table_1', className='table-wrapper')),
             html.Div(table_pagination, className='pagination')],
             className='table-with-paggination',
             id='pagination-contents'
@@ -184,7 +191,6 @@ app.layout = html.Div([
     
 
 ])
-
 
 
 ## Define HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout
@@ -244,4 +250,5 @@ def update_table(active_page):
 ## ----------------------------------------------------------------------------
 ## start server
 if __name__ == '__main__':
-    app.run_server(debug=False)
+    app.run_server(debug=False, port=8060)
+    #app.run_server(debug=False, port=8050)
