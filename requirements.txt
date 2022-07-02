@@ -1,0 +1,8 @@
+pandas
+scipy
+numpy
+matplotlib
+dash
+plotly
+dash_bootstrap_components
+warnings
