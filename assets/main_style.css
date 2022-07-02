@@ -146,7 +146,8 @@ h2 {
   }
   
   #the_title {
-  font-size: 2vh;
+    font-size: 2vh;
+    padding-top: 1.2vh;
   }
 }
 
