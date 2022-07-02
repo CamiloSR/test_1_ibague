@@ -244,11 +244,3 @@ def update_table(active_page):
     active_page += 1
     page_df = table_df.iloc[active_page * max_rows : (active_page + 1) * max_rows]
     return generate_table(page_df), table_pagination
-
-
-## ----------------------------------------------------------------------------
-## ----------------------------------------------------------------------------
-## start server
-if __name__ == '__main__':
-    app.run_server(debug=False, port=8060)
-    #app.run_server(debug=False, port=8050)
