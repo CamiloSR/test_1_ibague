@@ -50,6 +50,7 @@ def generate_table(df, max_rows = 25):
 ## app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 ## Start application
 app = dash.Dash(__name__)
+server = app.server
 
 
 ## --------------------------------------------------------------------------------------------------------------
