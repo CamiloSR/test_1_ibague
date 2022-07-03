@@ -30,7 +30,6 @@ h2 {
   display: block;
 }
 
-
 #the_title {
   font-size: 4vh;
   color: #fff;
@@ -108,6 +107,7 @@ h2 {
 
 .dash-table-container {
   margin-bottom: 60px;
+    border: #69120B solid 2px !important;
 }
 
 .table-with-paggination {
@@ -144,7 +144,7 @@ h2 {
     display: block;
     align-items: top;
   }
-  
+    
   #the_title {
     font-size: 2vh;
     padding-top: 1.2vh;
