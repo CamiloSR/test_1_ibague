@@ -21,6 +21,8 @@
   max-width: 100%;
   white-space: nowrap;
   background-color: white;
+  border: #69120B solid 2px !important;
+    
 }
 
 .fl-table td,
