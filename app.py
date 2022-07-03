@@ -17,7 +17,7 @@ import plotly.express as px
 ## ----------------------------------------------------------------------------
 ## app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 ## Start application
-app = dash.Dash(__main__)
+app = dash.Dash(__name__)
 server = app.server
 
 
