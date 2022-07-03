@@ -114,9 +114,15 @@ h2 {
   display: block;
 }
 
-.pies_1{
-    border: #69120B solid 2px;
-    height: 780px;
+
+#estados_pie{
+    border: #69120B solid 2px !important;
+    height: 388px !important;
+}
+
+#tipos_pie{
+    border: #69120B solid 2px !important;
+    height: 388px !important;
 }
 
 @media only screen and (max-width: 420px) {
