@@ -17,13 +17,16 @@ import plotly.express as px
 ## ----------------------------------------------------------------------------
 ## app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 ## Start application
-app = dash.Dash(__name__)
+app = dash.Dash()
 server = app.server
 
 
 # File url set as public in google drive so wecan read the data from it
-dsetURL = 'https://drive.google.com/uc?id=1ELBlnXhxsPlWuLxNZl7268bBp_2HCNbO&export=format=csv'
-df = pd.read_csv(dsetURL, low_memory=False)
+df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
+                   '1qCn8flw5T2hFzn6YHBXHVjYyi0f7WttleD47lh276PY' +
+                   '/export?gid=1798431102&format=csv',  #1697607596
+                 low_memory=False,
+                 index_col=0)
 
 #path = '/Users/camilosr/Documents/Data Science/DS4A/Project/Characterization/styles/'
 #external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -158,7 +161,7 @@ fig_2 = px.pie(pie_tipos, values=pie_tipos['Cantidad'], names=pie_tipos.index)
 ## --------------------------------------------------------------------------------------------------------------
 ## --------------------------------------------------------------------------------------------------------------
 ## --------------------------------------------------------------------------------------------------------------
-## Define HTML Layout
+## Define HTML Layout - START
 ## --------------------------------------------------------------------------------------------------------------
 
 app.layout = html.Div([
@@ -189,14 +192,10 @@ app.layout = html.Div([
     ],
         className="charts_1"),
     
-
 ])
 
-
-## Define HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout
-## Define HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout
-## Define HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout - HTML Layout
 ## --------------------------------------------------------------------------------------------------------------
+## Define HTML Layout END
 ## --------------------------------------------------------------------------------------------------------------
 ## --------------------------------------------------------------------------------------------------------------
 ## --------------------------------------------------------------------------------------------------------------
