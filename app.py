@@ -21,12 +21,28 @@ app = dash.Dash(__name__)
 server = app.server
 
 
-# File url set as public in google drive so wecan read the data from it
-df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
+def load_the_table():
+    df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
                    '1qCn8flw5T2hFzn6YHBXHVjYyi0f7WttleD47lh276PY' +
                    '/export?gid=1798431102&format=csv',  #1697607596
                  low_memory=False,
                  index_col=0)
+    table_headers = {'no_radicacion': 'N° Radicación',
+                 'nombre_completo': 'Nombre Completo',
+                 'identificacion': 'N° Documento',
+                 'fecha_radicacion': 'Fecha Radicación',
+                 'descripcion': 'Tipo PQRS',
+                 'glb_estado_id': 'Estado'
+                }
+    table_df = df[['no_radicacion',
+                   'nombre_completo',
+                   'identificacion',
+                   'fecha_radicacion',
+                   'descripcion',
+                   'glb_estado_id']]
+    table_df.rename(columns=table_headers, inplace=True)
+    
+    return table_df
 
 #path = '/Users/camilosr/Documents/Data Science/DS4A/Project/Characterization/styles/'
 #external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -119,21 +135,8 @@ search_1 = dcc.Input(
 ## ----------------------------------------------------------------------------
 ## ----------------------------------------------------------------------------
 ## Main Table
-table_headers = {'no_radicacion': 'N° Radicación',
-                 'nombre_completo': 'Nombre Completo',
-                 'identificacion': 'N° Documento',
-                 'fecha_radicacion': 'Fecha Radicación',
-                 'descripcion': 'Tipo PQRS',
-                 'glb_estado_id': 'Estado'
-                }
-table_df = df[['no_radicacion',
-               'nombre_completo',
-               'identificacion',
-               'fecha_radicacion',
-               'descripcion',
-               'glb_estado_id']]
-table_df.rename(columns=table_headers, inplace=True)
-table_1 = generate_table(table_df, max_rows=20)
+
+table_1 = generate_table(load_the_table(), max_rows=20)
 
 table_pagination = dbc.Pagination(max_value=7,
                                   first_last=True,
@@ -144,6 +147,9 @@ table_pagination = dbc.Pagination(max_value=7,
 ## ----------------------------------------------------------------------------
 ## ----------------------------------------------------------------------------
 ## Pie Charts
+
+table_df = load_the_table()
+
 pie_estados = table_df.groupby(by=["Estado"]).count()
 pie_tipos = table_df.groupby(by=["Tipo PQRS"]).count()
 
@@ -179,7 +185,7 @@ app.layout = html.Div([
     
     html.Div([
         html.Div(
-            [html.Div(html.Div(id='table_1', className='table-wrapper')),
+            [html.Div(html.Div(generate_table(load_the_table()), className='table-wrapper')),
             html.Div(table_pagination, className='pagination')],
             className='table-with-paggination',
             id='pagination-contents'
@@ -214,21 +220,21 @@ app.layout = html.Div([
 
 def display_table(input_tipo_doc, input_no_doc):
     if input_tipo_doc is None:
-        return generate_table(table_df)
+        return dash.no_update
     
     if (not input_tipo_doc or not input_no_doc):
-        return generate_table(table_df)
+        return dash.no_update
     
     if input_tipo_doc == 'n_radicacion' and len(input_tipo_doc) < 11:
-        return generate_table(dff)
+        return generate_table(load_the_table())
 
     if input_tipo_doc == 'n_documento':
         input_no_doc = int(input_no_doc)
-        dff = table_df.loc[table_df['N° Documento'] == input_no_doc]
+        dff = load_the_table().loc[table_df['N° Documento'] == input_no_doc]
         return generate_table(dff)
     
     if input_tipo_doc == 'n_radicacion':
-        dff = table_df.loc[table_df['N° Radicación'] == input_no_doc]
+        dff = load_the_table().loc[table_df['N° Radicación'] == input_no_doc]
         return generate_table(dff)
 
 ## ----------------------------------------------------------------------------
