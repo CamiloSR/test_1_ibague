@@ -174,7 +174,8 @@ app.layout = html.Div([
         ],
     className="buscadores"),
     
-    html.H2(children='Main Charts', style={'text-align':'center'}),
+    html.Div([html.H2(children='Main Charts', style={'text-align':'center'}),
+              dbc.Button("form", href="http://team209ds4a.atwebpages.com",  target="_blank", className="button_1", id="my_button")]),
     
     html.Div([
         html.Div(
@@ -250,3 +251,4 @@ def update_table(active_page):
 ## start server
 if __name__ == '__main__':
     app.run_server(debug=False)
+    #app.run_server(debug=False, port=8050)
