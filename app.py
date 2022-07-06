@@ -21,10 +21,15 @@ app = dash.Dash(__name__)
 server = app.server
 
 
-def load_the_table():
+def load_the_table():    
+    """
     df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
                    '1qCn8flw5T2hFzn6YHBXHVjYyi0f7WttleD47lh276PY' +
                    '/export?gid=1798431102&format=csv',  #1697607596
+                 low_memory=False,
+                 index_col=0)
+    """
+    df = pd.read_csv('ibage_big_dt.csv',  #1697607596
                  low_memory=False,
                  index_col=0)
     table_headers = {'no_radicacion': 'N° Radicación',
@@ -181,7 +186,8 @@ app.layout = html.Div([
     className="buscadores"),
     
     html.Div([html.H2(children='Main Charts', style={'text-align':'center'}),
-              dbc.Button("form", href="http://team209ds4a.atwebpages.com",  target="_blank", className="button_1", id="my_button")]),
+              dbc.Button("Form", href="http://team209ds4a.atwebpages.com",  target="_blank", className="button_1", id="my_button"),
+             dbc.Button("Train", href="http://team209ds4a.atwebpages.com/model.html",  target="_blank", className="button_2", id="my_button_2")]),
     
     html.Div([
         html.Div(
