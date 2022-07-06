@@ -22,16 +22,12 @@ server = app.server
 
 
 def load_the_table():    
-    """
     df = pd.read_csv('https://docs.google.com/spreadsheets/d/' + 
                    '1qCn8flw5T2hFzn6YHBXHVjYyi0f7WttleD47lh276PY' +
                    '/export?gid=1798431102&format=csv',  #1697607596
                  low_memory=False,
                  index_col=0)
-    """
-    df = pd.read_csv('ibage_big_dt.csv',  #1697607596
-                 low_memory=False,
-                 index_col=0)
+
     table_headers = {'no_radicacion': 'N° Radicación',
                  'nombre_completo': 'Nombre Completo',
                  'identificacion': 'N° Documento',
